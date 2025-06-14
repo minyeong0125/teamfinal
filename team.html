@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>정보보안 홈페이지</title>
+    <link rel="stylesheet" href="style.css" />
+        <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+
+
+    <style>
+
+      @font-face {
+        font-family: "DOSGothic";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        margin: 0;
+        height: 100vh;
+        background: black;
+        color: #00ff00;
+         font-family: "DOSGothic", monospace;
+      }
+
+      #matrix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      h2 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 5px #00ff00;
+        text-align: center;
+      }
+
+      p {
+        font-size: 1.5rem;
+        max-width: 800px;
+        text-shadow: 0 0 2px #00ff00;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .team-slider {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 0;
+        overflow: hidden;
+      }
+
+      #teamContainer {
+        display: flex;
+        gap: 20px;
+        transition: transform 0.5s ease;
+      }
+
+      .member-box {
+        background-color: black;
+        border: 1px solid #00ff00;
+        border-radius: 10px;
+        padding: 15px;
+        min-width: 230px;
+        max-width: 220px;
+        text-align: center;
+        color: #00ff00;
+        box-shadow: 0 0 10px #00ff00;
+         font-family: "DOSGothic", monospace;
+      }
+
+      .member-box img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .member-box a.github {
+        display: inline-block;
+        color: #00ff00;
+        text-decoration: none;
+        margin-bottom: 10px;
+      }
+
+      /* ← → 버튼 스타일 고정 */
+      /* 수정된 버튼 스타일 */
+      .arrow-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid #00ff00;
+        color: #00ff00;
+        font-size: 20px; /* 크기 키움 */
+        padding: 10px 20px;
+        cursor: pointer;
+        z-index: 10;
+        transition: 0.3s;
+        border-radius: 50%;
+      }
+
+      /* 정확히 좌우 배치 */
+      #prevBtn {
+        left: 10px;
+      }
+
+      #nextBtn {
+        right: 10px;
+      }
+
+
+      .footer {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        background-color: black;
+        padding: 40px 0;
+        color: #00ff00;
+       
+        border-top: 1px solid #00ff00;
+      }
+
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-column h3 {
+        margin-bottom: 12px;
+        color: #00ff00;
+        font-weight: 700;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 8px;
+        cursor: default;
+        user-select: none;
+      }
+
+      .pro{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 100px;
+      }
+
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <canvas id="matrix"></canvas>
+
+    <nav id="navbar">
+      <ul class="menu">
+        <li>
+          <a href="index.html" class="nav-link active">Web Development</a>
+        </li>
+        <li><a href="/function.html" class="nav-link">Function</a></li>
+        <li><a href="/tool.html" class="nav-link">Tool</a></li>
+        <li><a href="/reference.html" class="nav-link">Reference</a></li>
+        <li><a href="/quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="/team.html" class="nav-link">Team</a></li>
+      </ul>
+    </nav>
+
+
+     
+    </div>
+
+    <div class="intro-container"><br/><br/>
+      <h2>팀원 소개</h2>
+      <div class="team-slider">
+        <button id="prevBtn" class="arrow-btn">&#10094;</button>
+        <div class="team-container" id="teamContainer">
+          <!-- 팀원 박스 -->
+          <div class="member-box">
+            <img src="/image/hacker.png" />
+            <h4>박민영</h4>
+            <p>92410756</p>
+            <a
+              href="https://github.com/minyeong0125"
+              class="github"
+              target="_blank"
+              >GitHub</a
+            >
+          </div>
+          <div class="member-box">
+            <img src="/image/hacker.png" alt="" />
+            <h4>송미강</h4>
+            <p>92410794</p>
+            <a
+              href="https://github.com/Junbyung2"
+              class="github"
+              target="_blank"
+              >GitHub</a
+            >
+          </div>
+          <div class="member-box">
+            <img src="/image/hacker.png" />
+            <h4>원종은</h4>
+            <p>92410823</p>
+            <a
+              href="https://github.com/euniii0224"
+              class="github"
+              target="_blank"
+              >GitHub</a
+            >
+          </div>
+          <div class="member-box">
+            <img src="/image/hacker.png" />
+            <h4>이성혜</h4>
+            <p>92415548</p>
+            <a
+              href="https://github.com/SuNghYe414"
+              class="github"
+              target="_blank"
+              >GitHub</a
+            >
+          </div>
+          <div class="member-box">
+            <img src="/image/hacker.png" />
+            <h4>허다현</h4>
+            <p>92410990</p>
+            <a href="https://github.com/chick127" class="github" target="_blank"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <button id="nextBtn" class="arrow-btn">&#10095;</button>
+      </div>
+    </div>
+    <div class="pro">
+      <h2 class="name">Last Project</h2>
+      <a href="https://team-pro-lemon.vercel.app/"><img src="/image/team1.JPG" width="500"></a>
+      
+    </div>
+
+    <footer class="footer">
+      <div class="footer-column">
+        <h3>Page</h3>
+        <ul>
+          <li>Function</li>
+          <li>Tool</li>
+          <li>Reference</li>
+          <li>Quiz</li>
+          <li>Project</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Team</h3>
+        <ul>
+          <li>박민영</li>
+          <li>송미강</li>
+          <li>원종은</li>
+          <li>이성혜</li>
+          <li>허다현</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>사용 언어</h3>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JS</li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+
+    <script>
+      const teamContainer = document.getElementById("teamContainer");
+      const nextBtn = document.getElementById("nextBtn");
+      const prevBtn = document.getElementById("prevBtn");
+
+      let originalBoxes = Array.from(document.querySelectorAll(".member-box"));
+      const visibleCount = 3;
+      const boxWidth = originalBoxes[0].offsetWidth + 20;
+
+      // 클론 노드 생성
+      const clonesBefore = originalBoxes
+        .slice(-visibleCount)
+        .map((box) => box.cloneNode(true));
+      const clonesAfter = originalBoxes
+        .slice(0, visibleCount)
+        .map((box) => box.cloneNode(true));
+
+      clonesBefore.forEach((clone) =>
+        teamContainer.insertBefore(clone, teamContainer.firstChild)
+      );
+      clonesAfter.forEach((clone) => teamContainer.appendChild(clone));
+
+      // 슬라이드 전체 박스 목록 업데이트
+      const allBoxes = Array.from(document.querySelectorAll(".member-box"));
+      let currentIndex = visibleCount;
+
+      // 초기 위치 세팅
+      teamContainer.style.transform = `translateX(-${
+        currentIndex * boxWidth
+      }px)`;
+
+      function updateSlider(animate = true) {
+        teamContainer.style.transition = animate
+          ? "transform 0.5s ease"
+          : "none";
+        teamContainer.style.transform = `translateX(-${
+          currentIndex * boxWidth
+        }px)`;
+      }
+
+      nextBtn.addEventListener("click", () => {
+        currentIndex++;
+        updateSlider(true);
+
+        teamContainer.addEventListener(
+          "transitionend",
+          () => {
+            if (currentIndex >= allBoxes.length - visibleCount) {
+              currentIndex = visibleCount;
+              updateSlider(false);
+            }
+          },
+          { once: true }
+        );
+      });
+
+      prevBtn.addEventListener("click", () => {
+        currentIndex--;
+        updateSlider(true);
+
+        teamContainer.addEventListener(
+          "transitionend",
+          () => {
+            if (currentIndex < visibleCount) {
+              currentIndex = allBoxes.length - visibleCount * 2;
+              updateSlider(false);
+            }
+          },
+          { once: true }
+        );
+      });
+
+      // 창 크기 변경 시 재정렬
+      window.addEventListener("resize", () => {
+        updateSlider(false);
+      });
+    </script>
+
+    <!-- 스크롤 페이드 인 -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            entry.isIntersecting
+              ? entry.target.classList.add("visible")
+              : entry.target.classList.remove("visible");
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll(".fade-in-section").forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>

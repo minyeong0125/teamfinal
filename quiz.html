@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>웹 보안 Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @font-face {
+        font-family: "DOSGothic";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        background: #000000;
+        color: #00ff00;
+        line-height: 1.6;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "DOSGothic", monospace;
+      }
+
+      #navbar {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 50px;
+      }
+      header h1 {
+        font-size: 2rem;
+        color: #00ff00;
+      }
+      main {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+      }
+      .quiz__wrap {
+        max-width: 600px;
+        flex-grow: 1;
+        background: #111;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+      }
+      .quiz__title span {
+        font-weight: bold;
+        color: #00ff00;
+      }
+      .quiz__title em {
+        font-size: 0.9rem;
+        color: #33ff33;
+        display: block;
+      }
+      .quiz__question em {
+        font-weight: bold;
+        color: #00ff00;
+      }
+      .quiz__question span {
+        display: inline;
+        margin-top: 5px;
+      }
+      .quiz__choice {
+        margin-top: 20px;
+      }
+      .quiz__choice label {
+        display: block;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 2px solid #00ff00;
+        border-radius: 5px;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .quiz__choice label.selected {
+        background-color: #004400;
+      }
+      .quiz__choice input[type="radio"] {
+        display: none;
+      }
+      .quiz__choice label:hover {
+        background: #003300;
+      }
+      .quiz__answer {
+        margin-top: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .quiz__answer button {
+        padding: 10px 20px;
+        background: #00ff00;
+        border: none;
+        color: #000;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        flex-grow: 1;
+      }
+      .quiz__answer button:disabled {
+        background-color: #001a00;
+        cursor: not-allowed;
+        color: #005f00;
+      }
+      .quiz__desc {
+        margin-top: 20px;
+        padding: 15px;
+        background: #002200;
+        border-radius: 5px;
+        display: none;
+      }
+      .quiz__info,
+      .quiz__check {
+        margin-top: 15px;
+        text-align: center;
+        font-weight: bold;
+      }
+      .character__wrap {
+        margin-top: 20px;
+        height: 120px;
+        text-align: center;
+      }
+      .character__wrap img {
+        display: none;
+        max-height: 100px;
+        width: auto;
+      }
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-15px);
+        }
+        60% {
+          transform: translateY(-7px);
+        }
+      }
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        10% {
+          transform: translateX(-5px);
+        }
+        20% {
+          transform: translateX(5px);
+        }
+        30% {
+          transform: translateX(-5px);
+        }
+        40% {
+          transform: translateX(5px);
+        }
+        50% {
+          transform: translateX(-5px);
+        }
+        60% {
+          transform: translateX(5px);
+        }
+        70% {
+          transform: translateX(-5px);
+        }
+        80% {
+          transform: translateX(5px);
+        }
+        90% {
+          transform: translateX(-5px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .like .smile {
+        display: inline-block;
+        animation: bounce 0.8s;
+      }
+      .dislike .sad {
+        display: inline-block;
+        animation: shake 0.8s;
+      }
+      .quiz__result {
+        display: none;
+        text-align: center;
+        padding: 20px;
+        background: #002200;
+        border-radius: 10px;
+        margin-top: 30px;
+        color: #00ff00;
+        font-size: 1.2rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .quiz__result button {
+        padding: 10px 20px;
+        background: #00ff00;
+        border: none;
+        color: #000;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      .sad {
+        border-radius: 50%;
+      }
+
+      .scoreboard-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 250px;
+        background: #111;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+        color: #00ff00;
+        cursor: pointer;
+      }
+
+      .scoreboard-container h2 {
+        color: #00ff00;
+        margin-bottom: 20px;
+      }
+
+      .player-score {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #003300;
+        border: 2px solid #00ff00;
+      }
+
+      .set-score {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #00ff00;
+      }
+
+      .current-score {
+        font-size: 5rem;
+        font-weight: bold;
+        color: #00ff00;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        background-color: black;
+        padding: 40px 0;
+        color: #00ff00;
+        border-top: 1px solid #00ff00;
+      }
+
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-column h3 {
+        margin-bottom: 12px;
+        color: #00ff00;
+        font-weight: 700;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 8px;
+        cursor: default;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <ul class="menu">
+        <li>
+          <a href="index.html" class="nav-link active">Web Development</a>
+        </li>
+        <li><a href="/function.html" class="nav-link">Function</a></li>
+        <li><a href="/tool.html" class="nav-link">Tool</a></li>
+        <li><a href="/reference.html" class="nav-link">Reference</a></li>
+        <li><a href="/quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="/team.html" class="nav-link">Team</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <br />
+      <h1>웹 보안 Quiz</h1>
+    </header>
+    <main>
+      <div class="quiz__wrap">
+        <div class="quiz__title"></div>
+        <div class="quiz__question"></div>
+        <h4></h4>
+        <div class="quiz__choice"></div>
+        <div class="character__wrap">
+          <img
+            src="https://cdn.pixabay.com/animation/2022/11/01/09/21/09-21-24-889_512.gif"
+            class="smile"
+            alt="정답 웃는 얼굴"
+          />
+          <img
+            src="https://media.tenor.com/Q59LDPQeTiAAAAAM/last-day-of-school.gif"
+            class="sad"
+            alt="오답 슬픈 얼굴"
+          />
+        </div>
+        <div class="quiz__answer">
+          <button class="prev">이전 문제</button>
+          <button class="next">다음 문제</button>
+        </div>
+        <div class="quiz__desc"></div>
+        <div class="quiz__info"></div>
+        <div class="quiz__check">총 <span>0</span> 개 맞춤</div>
+      </div>
+      <div class="quiz__result"></div>
+
+      <div class="scoreboard-container">
+        <h2>내 퀴즈 점수</h2>
+        <div id="quizScoreboard" class="player-score">
+          <span id="quizTotalCorrect" class="current-score">0</span>
+          <span class="set-score">문제</span>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-column">
+        <h3>Page</h3>
+        <ul>
+          <li>Function</li>
+          <li>Tool</li>
+          <li>Reference</li>
+          <li>Quiz</li>
+          <li>Project</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Team</h3>
+        <ul>
+          <li>박민영</li>
+          <li>송미강</li>
+          <li>원종은</li>
+          <li>이성혜</li>
+          <li>허다현</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>사용 언어</h3>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JS</li>
+        </ul>
+      </div>
+    </footer>
+    <script>
+      const quizInfo = [
+        {
+          infoType: "웹 보안",
+          infoQuestion: "SQL Injection 공격을 방지하는 가장 효과적인 방법은?",
+          infoChoice: [
+            "데이터 암호화",
+            "방화벽 설정",
+            "Prepared Statement 사용",
+            "쿠키 보안 설정",
+          ],
+          infoAnswer: "Prepared Statement 사용",
+          infoDesc:
+            "SQL Injection을 방지하기 위한 가장 효과적인 방법은 Prepared Statement 또는 파라미터화된 쿼리를 사용하는 것입니다.",
+        },
+        {
+          infoType: "웹 보안",
+          infoQuestion: "XSS(Cross Site Scripting) 공격을 막기 위한 방법은?",
+          infoChoice: [
+            "입력값 검증 및 이스케이프 처리",
+            "SQL 쿼리 최적화",
+            "HTTPS 사용",
+            "서버 시간 동기화",
+          ],
+          infoAnswer: "입력값 검증 및 이스케이프 처리",
+          infoDesc:
+            "XSS는 사용자 입력에 악성 스크립트가 삽입되는 공격으로, 입력값을 검증하고 HTML 이스케이프 처리를 해야 합니다.",
+        },
+        {
+          infoType: "웹 보안",
+          infoQuestion:
+            "CSRF(Cross Site Request Forgery)를 방지하기 위한 일반적인 방법은?",
+          infoChoice: [
+            "IP 차단",
+            "Captcha 사용",
+            "CSRF 토큰 사용",
+            "SSL 인증서 적용",
+          ],
+          infoAnswer: "CSRF 토큰 사용",
+          infoDesc:
+            "CSRF 공격은 사용자의 의지와 무관하게 요청이 전송되는 것으로, CSRF 토큰을 사용하여 이를 방지할 수 있습니다.",
+        },
+        {
+          infoType: "웹 보안",
+          infoQuestion:
+            "다음 중 웹 애플리케이션의 보안 강화를 위한 HTTP 응답 헤더가 아닌 것은?",
+          infoChoice: [
+            "Content-Security-Policy",
+            "X-Frame-Options",
+            "Strict-Transport-Security",
+            "Keep-Alive",
+          ],
+          infoAnswer: "Keep-Alive",
+          infoDesc:
+            "Keep-Alive는 연결 유지를 위한 헤더로 보안 강화 목적은 아닙니다.",
+        },
+        {
+          infoType: "웹 보안",
+          infoQuestion: "HTTPS의 주요 보안 기능으로 적절하지 않은 것은?",
+          infoChoice: [
+            "데이터 암호화",
+            "무결성 보장",
+            "서버 인증",
+            "디렉토리 구조 보호",
+          ],
+          infoAnswer: "디렉토리 구조 보호",
+          infoDesc:
+            "HTTPS는 데이터를 암호화하고 서버의 신원을 인증하지만, 서버의 디렉토리 구조를 보호하지는 않습니다.",
+        },
+      ];
+
+      const quizWrap = document.querySelector(".quiz__wrap");
+      const quizTitle = quizWrap.querySelector(".quiz__title");
+      const quizQuestion = quizWrap.querySelector(".quiz__question");
+      const quizChoice = quizWrap.querySelector(".quiz__choice");
+      const characterWrap = quizWrap.querySelector(".character__wrap"); // Renamed
+      const quizAnswerDiv = quizWrap.querySelector(".quiz__answer");
+      const quizPrev = quizWrap.querySelector(".prev");
+      const quizNext = quizWrap.querySelector(".next");
+      const quizDesc = quizWrap.querySelector(".quiz__desc");
+      const quizInfoDiv = quizWrap.querySelector(".quiz__info");
+      const quizCheck = quizWrap.querySelector(".quiz__check span");
+      const quizResult = document.querySelector(".quiz__result");
+
+      let quizCount = 0;
+      let userSelections = new Array(quizInfo.length).fill(null);
+      let isQuestionAnsweredCorrectly = new Array(quizInfo.length).fill(false);
+      let hasCurrentQuestionBeenScored = false;
+
+      const scoreboardContainer = document.querySelector(
+        ".scoreboard-container"
+      );
+      const quizTotalCorrect = document.getElementById("quizTotalCorrect");
+
+      let currentQuizScore = 0;
+
+      function initScoreboard() {
+        currentQuizScore = 0;
+        quizTotalCorrect.innerHTML = currentQuizScore;
+      }
+      initScoreboard();
+
+      function manualUpdateQuizScore() {
+        if (
+          isQuestionAnsweredCorrectly[quizCount] &&
+          !hasCurrentQuestionBeenScored
+        ) {
+          currentQuizScore++;
+          quizTotalCorrect.innerHTML = currentQuizScore;
+          hasCurrentQuestionBeenScored = true;
+        } else if (!isQuestionAnsweredCorrectly[quizCount]) {
+          alert("현재 문제는 정답이 아니어서 점수를 올릴 수 없습니다!");
+        } else if (hasCurrentQuestionBeenScored) {
+          alert("이미 점수를 올렸습니다!");
+        }
+      }
+
+      const resetQuiz = () => {
+        quizCount = 0;
+        userSelections = new Array(quizInfo.length).fill(null);
+        isQuestionAnsweredCorrectly = new Array(quizInfo.length).fill(false);
+        hasCurrentQuestionBeenScored = false;
+        quizWrap.style.display = "block";
+        quizResult.style.display = "none";
+        updateQuiz(quizCount);
+        updateScoreDisplay();
+        initScoreboard();
+      };
+
+      const updateQuiz = (index) => {
+        const q = quizInfo[index];
+
+        quizAnswerDiv.style.display = "flex";
+        quizDesc.style.display = "none";
+        characterWrap.classList.remove("like", "dislike"); // Renamed
+        characterWrap.querySelector(".smile").style.display = "none"; // Renamed
+        characterWrap.querySelector(".sad").style.display = "none"; // Renamed
+
+        hasCurrentQuestionBeenScored = isQuestionAnsweredCorrectly[index];
+
+        quizQuestion.innerHTML = `<em>${index + 1}</em>. <span>${
+          q.infoQuestion
+        }</span>`;
+
+        quizChoice.innerHTML = q.infoChoice
+          .map(
+            (ch) =>
+              `<label><input type="radio" name="choice" value="${ch}"><span>${ch}</span></label>`
+          )
+          .join("");
+
+        quizDesc.innerHTML = `정답은 <strong>${q.infoAnswer}</strong>입니다.<br>${q.infoDesc}`;
+        quizWrap.querySelector("h4").innerHTML = `총 ${
+          quizInfo.length - index
+        }문제 남았습니다.`;
+
+        quizPrev.disabled = quizCount === 0;
+        quizNext.disabled = false;
+
+        if (userSelections[index] !== null) {
+          const selectedInput = document.querySelector(
+            `.quiz__choice input[value="${userSelections[index]}"]`
+          );
+          if (selectedInput) {
+            selectedInput.checked = true;
+            document
+              .querySelectorAll(".quiz__choice label")
+              .forEach((lbl) => lbl.classList.remove("selected"));
+            selectedInput.parentElement.classList.add("selected");
+            quizDesc.style.display = "block";
+
+            if (userSelections[index] === q.infoAnswer) {
+              characterWrap.classList.add("like"); // Renamed
+              characterWrap.querySelector(".smile").style.display =
+                "inline-block"; // Renamed
+            } else {
+              characterWrap.classList.add("dislike"); // Renamed
+              characterWrap.querySelector(".sad").style.display =
+                "inline-block"; // Renamed
+            }
+          }
+        }
+
+        document.querySelectorAll(".quiz__choice input").forEach((input) => {
+          input.addEventListener("change", () => {
+            const selected = input.value;
+            const currentQuestion = quizInfo[quizCount];
+
+            document
+              .querySelectorAll(".quiz__choice label")
+              .forEach((lbl) => lbl.classList.remove("selected"));
+            input.parentElement.classList.add("selected");
+
+            characterWrap.classList.remove("like", "dislike"); // Renamed
+            characterWrap.querySelector(".smile").style.display = "none"; // Renamed
+            characterWrap.querySelector(".sad").style.display = "none"; // Renamed
+
+            userSelections[quizCount] = selected;
+
+            if (selected === currentQuestion.infoAnswer) {
+              characterWrap.classList.add("like"); // Renamed
+              characterWrap.querySelector(".smile").style.display =
+                "inline-block"; // Renamed
+              isQuestionAnsweredCorrectly[quizCount] = true;
+            } else {
+              characterWrap.classList.add("dislike"); // Renamed
+              characterWrap.querySelector(".sad").style.display =
+                "inline-block"; // Renamed
+              isQuestionAnsweredCorrectly[quizCount] = false;
+            }
+
+            quizDesc.style.display = "block";
+
+            updateScoreDisplay();
+          });
+        });
+      };
+
+      const updateScoreDisplay = () => {
+        let currentQuizCorrectCount = 0;
+        for (let i = 0; i < isQuestionAnsweredCorrectly.length; i++) {
+          if (isQuestionAnsweredCorrectly[i]) {
+            currentQuizCorrectCount++;
+          }
+        }
+        quizCheck.innerText = currentQuizCorrectCount;
+      };
+
+      quizNext.addEventListener("click", () => {
+        if (quizCount < quizInfo.length - 1) {
+          quizCount++;
+          updateQuiz(quizCount);
+        } else {
+          document.querySelector(".quiz__wrap").style.display = "none";
+          quizResult.style.display = "flex";
+
+          let finalScoreQuiz = 0;
+          for (let i = 0; i < isQuestionAnsweredCorrectly.length; i++) {
+            if (isQuestionAnsweredCorrectly[i]) {
+              finalScoreQuiz++;
+            }
+          }
+
+          quizResult.innerHTML = `퀴즈 완료!<br>맞힌 문제: ${finalScoreQuiz}
+          <button class="restart">다시 시작하기</button>`;
+
+          quizResult
+            .querySelector(".restart")
+            .addEventListener("click", resetQuiz);
+        }
+      });
+
+      quizPrev.addEventListener("click", () => {
+        if (quizCount > 0) {
+          quizCount--;
+          updateQuiz(quizCount);
+        }
+      });
+
+      scoreboardContainer.addEventListener("click", manualUpdateQuizScore);
+
+      updateQuiz(quizCount);
+      updateScoreDisplay();
+    </script>
+  </body>
+</html>

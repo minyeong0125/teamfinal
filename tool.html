@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>정보보안 홈페이지</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @font-face {
+        font-family: "DOSGothic";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        margin: 0;
+        height: 100vh;
+        background: black;
+        color: #00ff00;
+        overflow-x: hidden;
+        font-family: "DOSGothic", monospace;
+      }
+
+      #matrix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 5px #00ff00;
+      }
+
+      p {
+        font-size: 1.5rem;
+        max-width: 800px;
+        text-shadow: 0 0 2px #00ff00;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .title {
+        text-align: center;
+        font-size: 2rem;
+        margin: 20px;
+        text-shadow: 0 0 5px #00ff00;
+      }
+
+      .card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 20px;
+        padding: 40px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .card {
+        perspective: 1000px;
+        width: 100%;
+        height: 300px;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+      }
+
+      .card.is-flipped .card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        box-sizing: border-box;
+      }
+
+      .card-front {
+        background-color: #000;
+      }
+
+      .card-back {
+        background-color: #111;
+        color: #00ff00;
+        transform: rotateY(180deg);
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .card p {
+        font-size: 16px;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        background-color: black;
+        padding: 40px 0;
+        color: #00ff00;
+        border-top: 1px solid #00ff00;
+      }
+
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-column h3 {
+        margin-bottom: 12px;
+        color: #00ff00;
+        font-weight: 700;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 8px;
+        cursor: default;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="matrix"></canvas>
+
+    <nav id="navbar">
+      <ul class="menu">
+        <li>
+          <a href="index.html" class="nav-link active">Web Development</a>
+        </li>
+        <li><a href="/function.html" class="nav-link">Function</a></li>
+        <li><a href="/tool.html" class="nav-link">Tool</a></li>
+        <li><a href="/reference.html" class="nav-link">Reference</a></li>
+        <li><a href="/quiz.html" class="nav-link">Quiz</a></li>
+        <li><a href="/team.html" class="nav-link">Team</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h2 class="title"><br />Tool Information</h2>
+      <div class="card-container">
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="/image/vsc.png" width="100" />
+            </div>
+            <div class="card-back">
+              <h3>Visual Studio Code</h3>
+              <p>
+                소스코드 편집기<br />
+                웹 개발 시 가장 많이 사용되는 소스코드 편집기이다. HTML, CSS,
+                JavaScript뿐만 아니라 PHP, Node.js 등 다양한 언어를 지원하며,
+                실시간 디버깅과 Git연동 등 다양한 기능들이 내장되어있다.
+                효율적인 개발 환경을 제공받을 수 있는 소스코드 편집기이다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="/image/bootstrap.png" width="100" />
+            </div>
+            <div class="card-back">
+              <h3>Bootstrap</h3>
+              <p>
+                웹 사이트를 쉽게 만들 수 있게 도와주는 CSS, JS 프레임워크<br />
+                트위터에서 개발한 CSS 프레임워크로, 반응형 웹 디자인을 손쉽게
+                구현할 수 있게 도와준다. 미리 정의된 스타일과 컴포넌트를 활용해
+                복잡한 레이아웃도 간편하게 만들 수 있으며, 웹사이트의 뼈대를
+                빠르게 완성할 수 있는 강력한 도구이다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="/image/git.png" width="80" />
+            </div>
+            <div class="card-back">
+              <h3>GitHub</h3>
+              <p>
+                저장소 호스팅 서비스 및 공동 협업 플랫폼<br />
+                소스코드를 저장하고 버전을 관리할 수 있는 플랫폼으로, 전 세계
+                개발자들이 협업하고 소통할 수 있는 공간이다. 코드의 변경 이력을
+                관리할 수 있고 프로젝트를 다른 사람과 공유하거나 팀원들과 함께
+                개발할 수 있어 협업 필수 도구로 자리잡았다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="/image/vercel.png" width="200" />
+            </div>
+            <div class="card-back">
+              <h3>Vercel</h3>
+              <p>
+                클라우드 컴퓨팅 서비스<br />
+                정적 웹사이트 및 프론트엔드 프로젝트 배포를 위한 플랫폼으로,
+                복잡한 서버 설정 없이도 몇 번의 클릭만으로 프로젝트를 세상에
+                공개할 수 있게 해준다. GitHub와 연동하면 푸시할 때마다 자동
+                배포가 되어 편리하다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-column">
+        <h3>Page</h3>
+        <ul>
+          <li>Function</li>
+          <li>Tool</li>
+          <li>Reference</li>
+          <li>Quiz</li>
+          <li>Project</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Team</h3>
+        <ul>
+          <li>박민영</li>
+          <li>송미강</li>
+          <li>원종은</li>
+          <li>이성혜</li>
+          <li>허다현</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>사용 언어</h3>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JS</li>
+        </ul>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("click", () => {
+          card.classList.toggle("is-flipped");
+        });
+      });
+    </script>
+  </body>
+</html>
