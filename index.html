@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>정보보안 홈페이지</title>
+    <title>Team미정</title>
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
@@ -20,9 +20,9 @@
 
     <style>
       @font-face {
-        font-family: "DOSGothic";
-        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff")
-          format("woff");
+        font-family: 'DOSGothic';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff')
+          format('woff');
         font-weight: normal;
         font-style: normal;
       }
@@ -32,7 +32,7 @@
         height: 100vh;
         background: black;
         color: #00ff00;
-        font-family: "DOSGothic", monospace;
+        font-family: 'DOSGothic', monospace;
       }
 
       #matrix {
@@ -44,7 +44,20 @@
         z-index: -1;
       }
 
+      nav .menu li a {
+        transition: all 0.3s ease;
+        display: inline-block; /* transform 적용되도록 블록화 */
+      }
+
+      nav .menu li a:hover {
+        color: #00ff00;
+        font-weight: bold;
+        text-shadow: 0 0 8px #00ff00;
+        transform: scale(1.2); /* 글자 커짐 */
+      }
+
       .container {
+        margin-top: -150px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -101,7 +114,7 @@
         text-align: center;
         color: #00ff00;
         box-shadow: 0 0 10px #00ff00;
-        font-family: "DOSGothic", monospace;
+        font-family: 'DOSGothic', monospace;
       }
 
       .member-box img {
@@ -173,7 +186,7 @@
         background-color: black;
         padding: 40px 0;
         color: #00ff00;
-        font-family: "Fira Code", monospace;
+        font-family: 'Fira Code', monospace;
         border-top: 1px solid #00ff00;
       }
 
@@ -200,6 +213,13 @@
         cursor: default;
         user-select: none;
       }
+      #click {
+        margin: 0px 300px;
+        background-color: black;
+        color: #00ff00;
+        border: 1px solid #00ff00;
+        box-shadow: 0px 0px 5px #00ff00;
+      }
     </style>
     <link
       href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
@@ -221,139 +241,136 @@
         <li><a href="/team.html" class="nav-link">Team</a></li>
       </ul>
     </nav>
+    <main>
+      <br /><br />
+      <button onclick="toggleMatrix()" id="click">Click Me</button>
+      <div class="container">
+        <div class="text-box">
+          <h1>웹 개발의 세계</h1>
+          <p>
+            이 웹사이트는 웹 개발에 대한 이해와 실습을 돕기 위해
+            제작되었습니다.<br />웹 개발에 필요한 언어, 도구, 기사 등 다양한 웹
+            개발 주제를 탐구해보세요.
+          </p>
+        </div>
+      </div>
 
-    <div class="container">
-      <div class="text-box">
-        <h1>웹 개발의 세계</h1>
+      <div class="intro-container">
+        <h2>팀원 소개</h2>
+        <div class="team-slider">
+          <button id="prevBtn" class="arrow-btn">&#10094;</button>
+          <div class="team-container" id="teamContainer">
+            <!-- 팀원 박스 -->
+            <div class="member-box">
+              <img src="/image/hacker.png" />
+              <h4>박민영</h4>
+              <p>92410756</p>
+              <a
+                href="https://github.com/minyeong0125"
+                class="github"
+                target="_blank"
+                >GitHub</a
+              >
+            </div>
+            <div class="member-box">
+              <img src="/image/hacker.png" alt="" />
+              <h4>송미강</h4>
+              <p>92410794</p>
+              <a
+                href="https://github.com/Junbyung2"
+                class="github"
+                target="_blank"
+                >GitHub</a
+              >
+            </div>
+            <div class="member-box">
+              <img src="/image/hacker.png" />
+              <h4>원종은</h4>
+              <p>92410823</p>
+              <a
+                href="https://github.com/euniii0224"
+                class="github"
+                target="_blank"
+                >GitHub</a
+              >
+            </div>
+            <div class="member-box">
+              <img src="/image/hacker.png" />
+              <h4>이성혜</h4>
+              <p>92415548</p>
+              <a
+                href="https://github.com/SuNghYe414"
+                class="github"
+                target="_blank"
+                >GitHub</a
+              >
+            </div>
+            <div class="member-box">
+              <img src="/image/hacker.png" />
+              <h4>허다현</h4>
+              <p>92410990</p>
+              <a
+                href="https://github.com/chick127"
+                class="github"
+                target="_blank"
+                >GitHub</a
+              >
+            </div>
+          </div>
+          <button id="nextBtn" class="arrow-btn">&#10095;</button>
+        </div>
+      </div>
+
+      <div class="intro-container fade-in-section">
+        <h1>웹 개발이란?</h1>
         <p>
-          이 웹사이트는 웹 개발에 대한 이해와 실습을 돕기 위해
-          제작되었습니다.<br />웹 개발에 필요한 언어, 도구, 기사 등 다양한 웹
-          개발 주제를 탐구해보세요.
+          웹 개발은 웹사이트나 웹 애플리케이션을 설계하고 구축하는 과정으로,
+          사용자와 상호작용하는 프론트엔드와 서버 및 데이터 처리를 담당하는
+          백엔드로 나뉩니다.
+        </p>
+
+        <h2>프론트엔드 (Front-End)</h2>
+        <p>
+          사용자가 직접 보는 화면을 구성합니다. HTML, CSS, JavaScript를 사용하여
+          웹페이지의 디자인과 동작을 구현합니다. 예: 버튼 클릭, 애니메이션,
+          레이아웃 등.
+        </p>
+
+        <h2>백엔드 (Back-End)</h2>
+        <p>
+          데이터 저장, 사용자 인증, 서버 로직 등을 처리합니다. 주로 Python,
+          Java, Node.js와 같은 언어와 데이터베이스 시스템이 사용됩니다.
         </p>
       </div>
 
-      <!-- <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSifJlgod4wyWtrdNiYuRoCM355NbtPWpXtNA&s"
-        width="300"
-        height="200"
-        alt="Security Icon"
-        class="image-animate"
-      /> -->
-    </div>
-
-    <div class="intro-container">
-      <h2>팀원 소개</h2>
-      <div class="team-slider">
-        <button id="prevBtn" class="arrow-btn">&#10094;</button>
-        <div class="team-container" id="teamContainer">
-          <!-- 팀원 박스 -->
-          <div class="member-box">
-            <img src="/image/hacker.png" />
-            <h4>박민영</h4>
-            <p>92410756</p>
-            <a
-              href="https://github.com/minyeong0125"
-              class="github"
-              target="_blank"
-              >GitHub</a
-            >
-          </div>
-          <div class="member-box">
-            <img src="/image/hacker.png" alt="" />
-            <h4>송미강</h4>
-            <p>92410794</p>
-            <a
-              href="https://github.com/Junbyung2"
-              class="github"
-              target="_blank"
-              >GitHub</a
-            >
-          </div>
-          <div class="member-box">
-            <img src="/image/hacker.png" />
-            <h4>원종은</h4>
-            <p>92410823</p>
-            <a
-              href="https://github.com/euniii0224"
-              class="github"
-              target="_blank"
-              >GitHub</a
-            >
-          </div>
-          <div class="member-box">
-            <img src="/image/hacker.png" />
-            <h4>이성혜</h4>
-            <p>92415548</p>
-            <a
-              href="https://github.com/SuNghYe414"
-              class="github"
-              target="_blank"
-              >GitHub</a
-            >
-          </div>
-          <div class="member-box">
-            <img src="/image/hacker.png" />
-            <h4>허다현</h4>
-            <p>92410990</p>
-            <a href="https://github.com/chick127" class="github" target="_blank"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <button id="nextBtn" class="arrow-btn">&#10095;</button>
+      <div class="intro-container fade-in-section">
+        <h2>웹사이트는 어떻게 작동할까요?</h2>
+        <ol
+          style="
+            text-align: left;
+            max-width: 700px;
+            margin: auto;
+            line-height: 2;
+            font-size: 1.2rem;
+          "
+        >
+          <li>사용자가 웹 브라우저에서 주소를 입력합니다.</li>
+          <li>브라우저가 서버에 요청(request)을 보냅니다.</li>
+          <li>서버가 HTML, CSS, JS 파일을 응답(response)합니다.</li>
+          <li>브라우저가 파일을 받아 화면에 렌더링합니다.</li>
+        </ol>
       </div>
-    </div>
 
-    <div class="intro-container fade-in-section">
-      <h1>웹 개발이란?</h1>
-      <p>
-        웹 개발은 웹사이트나 웹 애플리케이션을 설계하고 구축하는 과정으로,
-        사용자와 상호작용하는 프론트엔드와 서버 및 데이터 처리를 담당하는
-        백엔드로 나뉩니다.
-      </p>
-
-      <h2>프론트엔드 (Front-End)</h2>
-      <p>
-        사용자가 직접 보는 화면을 구성합니다. HTML, CSS, JavaScript를 사용하여
-        웹페이지의 디자인과 동작을 구현합니다. 예: 버튼 클릭, 애니메이션,
-        레이아웃 등.
-      </p>
-
-      <h2>백엔드 (Back-End)</h2>
-      <p>
-        데이터 저장, 사용자 인증, 서버 로직 등을 처리합니다. 주로 Python, Java,
-        Node.js와 같은 언어와 데이터베이스 시스템이 사용됩니다.
-      </p>
-    </div>
-
-    <div class="intro-container fade-in-section">
-      <h2>웹사이트는 어떻게 작동할까요?</h2>
-      <ol
-        style="
-          text-align: left;
-          max-width: 700px;
-          margin: auto;
-          line-height: 2;
-          font-size: 1.2rem;
-        "
-      >
-        <li>사용자가 웹 브라우저에서 주소를 입력합니다.</li>
-        <li>브라우저가 서버에 요청(request)을 보냅니다.</li>
-        <li>서버가 HTML, CSS, JS 파일을 응답(response)합니다.</li>
-        <li>브라우저가 파일을 받아 화면에 렌더링합니다.</li>
-      </ol>
-    </div>
-
-    <div class="intro-container fade-in-section">
-      <h2>웹 개발자의 역할은?</h2>
-      <ul style="text-align: left; max-width: 700px; margin: auto">
-        <li><strong>프론트엔드:</strong> 사용자 인터페이스 개발</li>
-        <li><strong>백엔드:</strong> 서버 및 데이터 처리</li>
-        <li><strong>풀스택:</strong> 둘 다 가능</li>
-        <li><strong>DevOps:</strong> 배포, 운영 자동화 담당</li>
-      </ul>
-    </div>
-
+      <div class="intro-container fade-in-section">
+        <h2>웹 개발자의 역할은?</h2>
+        <ul style="text-align: left; max-width: 700px; margin: auto">
+          <li><strong>프론트엔드:</strong> 사용자 인터페이스 개발</li>
+          <li><strong>백엔드:</strong> 서버 및 데이터 처리</li>
+          <li><strong>풀스택:</strong> 둘 다 가능</li>
+          <li><strong>DevOps:</strong> 배포, 운영 자동화 담당</li>
+        </ul>
+      </div>
+    </main>
     <footer class="footer">
       <div class="footer-column">
         <h3>Page</h3>
@@ -388,81 +405,81 @@
     <script src="main.js"></script>
 
     <script>
-      const teamContainer = document.getElementById("teamContainer");
-      const nextBtn = document.getElementById("nextBtn");
-      const prevBtn = document.getElementById("prevBtn");
+      const teamContainer = document.getElementById('teamContainer')
+      const nextBtn = document.getElementById('nextBtn')
+      const prevBtn = document.getElementById('prevBtn')
 
-      let originalBoxes = Array.from(document.querySelectorAll(".member-box"));
-      const visibleCount = 3;
-      const boxWidth = originalBoxes[0].offsetWidth + 20;
+      let originalBoxes = Array.from(document.querySelectorAll('.member-box'))
+      const visibleCount = 3
+      const boxWidth = originalBoxes[0].offsetWidth + 20
 
       // 클론 노드 생성
       const clonesBefore = originalBoxes
         .slice(-visibleCount)
-        .map((box) => box.cloneNode(true));
+        .map((box) => box.cloneNode(true))
       const clonesAfter = originalBoxes
         .slice(0, visibleCount)
-        .map((box) => box.cloneNode(true));
+        .map((box) => box.cloneNode(true))
 
       clonesBefore.forEach((clone) =>
         teamContainer.insertBefore(clone, teamContainer.firstChild)
-      );
-      clonesAfter.forEach((clone) => teamContainer.appendChild(clone));
+      )
+      clonesAfter.forEach((clone) => teamContainer.appendChild(clone))
 
       // 슬라이드 전체 박스 목록 업데이트
-      const allBoxes = Array.from(document.querySelectorAll(".member-box"));
-      let currentIndex = visibleCount;
+      const allBoxes = Array.from(document.querySelectorAll('.member-box'))
+      let currentIndex = visibleCount
 
       // 초기 위치 세팅
       teamContainer.style.transform = `translateX(-${
         currentIndex * boxWidth
-      }px)`;
+      }px)`
 
       function updateSlider(animate = true) {
         teamContainer.style.transition = animate
-          ? "transform 0.5s ease"
-          : "none";
+          ? 'transform 0.5s ease'
+          : 'none'
         teamContainer.style.transform = `translateX(-${
           currentIndex * boxWidth
-        }px)`;
+        }px)`
       }
 
-      nextBtn.addEventListener("click", () => {
-        currentIndex++;
-        updateSlider(true);
+      nextBtn.addEventListener('click', () => {
+        currentIndex++
+        updateSlider(true)
 
         teamContainer.addEventListener(
-          "transitionend",
+          'transitionend',
           () => {
             if (currentIndex >= allBoxes.length - visibleCount) {
-              currentIndex = visibleCount;
-              updateSlider(false);
+              currentIndex = visibleCount
+              updateSlider(false)
             }
           },
           { once: true }
-        );
-      });
+        )
+      })
 
-      prevBtn.addEventListener("click", () => {
-        currentIndex--;
-        updateSlider(true);
+      prevBtn.addEventListener('click', () => {
+        currentIndex--
+        updateSlider(true)
 
         teamContainer.addEventListener(
-          "transitionend",
+          'transitionend',
           () => {
             if (currentIndex < visibleCount) {
-              currentIndex = allBoxes.length - visibleCount * 2;
-              updateSlider(false);
+              currentIndex = allBoxes.length - visibleCount * 2
+              updateSlider(false)
             }
           },
           { once: true }
-        );
-      });
+        )
+      })
 
       // 창 크기 변경 시 재정렬
-      window.addEventListener("resize", () => {
-        updateSlider(false);
-      });
+      window.addEventListener('resize', () => {
+        updateSlider(false)
+      })
     </script>
 
     <!-- 스크롤 페이드 인 -->
@@ -471,16 +488,16 @@
         (entries) => {
           entries.forEach((entry) => {
             entry.isIntersecting
-              ? entry.target.classList.add("visible")
-              : entry.target.classList.remove("visible");
-          });
+              ? entry.target.classList.add('visible')
+              : entry.target.classList.remove('visible')
+          })
         },
         { threshold: 0.1 }
-      );
+      )
 
-      document.querySelectorAll(".fade-in-section").forEach((el) => {
-        observer.observe(el);
-      });
+      document.querySelectorAll('.fade-in-section').forEach((el) => {
+        observer.observe(el)
+      })
     </script>
   </body>
 </html>

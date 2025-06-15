@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>팀 미정 홈페이지</title>
+    <title>Team미정</title>
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
@@ -20,23 +20,21 @@
 
     <style>
       @font-face {
-        font-family: "DOSGothic";
-        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff")
-          format("woff");
+        font-family: 'DOSGothic';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff')
+          format('woff');
         font-weight: normal;
         font-style: normal;
       }
       body {
         background-color: black;
-        font-family: "DOSGothic", monospace;
+        font-family: 'DOSGothic', monospace;
+        color: #00ff00;
       }
       #news-all {
         margin-top: 10px;
         width: 100%;
         min-height: 90px;
-        /* background-color: #0d2c0d; */
-
-        /* color: white; */
         color: #00ff00;
         float: right;
       }
@@ -84,10 +82,11 @@
       }
 
       .news-card {
-        background-color: white;
+        background-color: rgba(95, 95, 95, 0.627);
         margin-left: 100px;
         margin-right: 100px;
         padding: 20px;
+        color: #00ff00;
       }
 
       .news-header {
@@ -113,10 +112,11 @@
         cursor: pointer;
         padding: 0;
         transition: color 0.3s ease;
+        color: #00ff00bc;
       }
 
       .news-toggle:hover {
-        color: #0d2c0d;
+        color: #267426;
       }
 
       .news-content {
@@ -124,11 +124,23 @@
         margin-top: 10px;
         font-size: 15px;
         line-height: 1.6;
-        color: #222;
+        color: #00ff00;
       }
 
       .news-content.active {
         display: block;
+      }
+
+      nav .menu li a {
+        transition: all 0.3s ease;
+        display: inline-block; /* transform 적용되도록 블록화 */
+      }
+
+      nav .menu li a:hover {
+        color: #00ff00;
+        font-weight: bold;
+        text-shadow: 0 0 8px #00ff00;
+        transform: scale(1.2); /* 글자 커짐 */
       }
     </style>
   </head>
@@ -350,17 +362,17 @@
       </section>
     </section>
     <script>
-      const toggles = document.querySelectorAll(".news-toggle"); // 제목들
-      const contents = document.querySelectorAll(".news-content"); // 내용들
+      const toggles = document.querySelectorAll('.news-toggle') // 제목들
+      const contents = document.querySelectorAll('.news-content') // 내용들
 
       toggles.forEach((btn, idx) => {
-        btn.addEventListener("click", () => {
-          const content = contents[idx];
-          const isOpen = content.style.display === "block";
+        btn.addEventListener('click', () => {
+          const content = contents[idx]
+          const isOpen = content.style.display === 'block'
 
-          content.style.display = isOpen ? "none" : "block";
-        });
-      });
+          content.style.display = isOpen ? 'none' : 'block'
+        })
+      })
     </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
